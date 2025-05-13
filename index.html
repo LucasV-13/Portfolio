@@ -4,846 +4,686 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucas VINTENON - Portfolio</title>
-    <style>
-        /* Variables */
-        :root {
-            --primary-color: #4a5568;
-            --secondary-color: #718096;
-            --accent-color: #a0aec0;
-            --text-color: #2d3748;
-            --light-text: #f7fafc;
-            --background: #f8f9fa;
-            --section-bg: #ffffff;
-            --section-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-            --max-width: 1000px;
-            --header-height: 70px;
-        }
-
-        /* Import fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
-
-        /* Base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        body {
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: var(--background);
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--secondary-color);
-        }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        /* Layout */
-        section {
-            background-color: var(--section-bg);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--section-shadow);
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary-color);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            color: var(--light-text);
-            font-weight: 700;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: var(--light-text);
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--light-text);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .contact-btn {
-            background-color: var(--accent-color);
-            color: var(--light-text);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            transform: translateY(-2px);
-        }
-
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--light-text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Main Content */
-        main {
-            padding-top: calc(var(--header-height) + 2rem);
-            padding-bottom: 3rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .hero-image {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: var(--section-shadow);
-            border: 5px solid var(--section-bg);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text {
-            max-width: 600px;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            margin-left: 1.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 2px;
-            background-color: var(--accent-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: -7px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: var(--section-bg);
-            border: 2px solid var(--accent-color);
-        }
-
-        .timeline-date {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--secondary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-company {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-item {
-            display: flex;
-            align-items: center;
-            background-color: var(--section-bg);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--section-shadow);
-            transition: var(--transition);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .skill-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.8rem;
-            color: var(--secondary-color);
-        }
-
-        .skill-name {
-            font-weight: 500;
-        }
-
-        /* Language Progress */
-        .language-item {
-            margin-bottom: 1rem;
-        }
-
-        .language-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .language-name {
-            font-weight: 500;
-        }
-
-        .language-level {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background-color: #e2e8f0;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 3px;
-        }
-
-        /* Contact */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .contact-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            color: var(--light-text);
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            margin-top: 1.5rem;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .download-btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            transform: translateY(-2px);
-        }
-
-        .download-btn svg {
-            margin-right: 0.5rem;
-            vertical-align: middle;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-image {
-                width: 220px;
-                height: 220px;
-            }
-            
-            h2::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            .timeline {
-                margin-left: 0;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                flex-direction: column;
-                background-color: var(--primary-color);
-                padding: 1rem 0;
-                gap: 0;
-            }
-            
-            .nav-links.show {
-                display: flex;
-            }
-            
-            .nav-links a {
-                padding: 1rem 0;
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .menu-btn {
-                display: block;
-            }
-            
-            .contact-btn {
-                display: none;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .skills-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-image {
-                width: 180px;
-                height: 180px;
-            }
-            
-            section {
-                padding: 1.5rem;
-            }
-            
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS (Animate On Scroll) pour les animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- style.css -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
+    <header id="header">
         <nav>
             <div class="container nav-container">
                 <a href="#" class="logo">LUCAS VINTENON</a>
-                <div class="nav-links">
-                    <a href="#about">À propos</a>
-                    <a href="#formation">Formation</a>
-                    <a href="#experience">Expérience</a>
-                    <a href="#competences">Compétences</a>
-                    <a href="#langues">Langues</a>
-                    <a href="#contact">Contact</a>
+                <div class="nav-links" id="navLinks">
+                    <a href="#about" class="nav-link">À propos</a>
+                    <a href="#formation" class="nav-link">Formation</a>
+                    <a href="#experience" class="nav-link">Expérience</a>
+                    <a href="#competences" class="nav-link">Compétences</a>
+                    <a href="#projets" class="nav-link">Projets</a>
+                    <a href="#ressources" class="nav-link">Ressources</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </div>
                 <a href="#contact" class="contact-btn">Contact</a>
-                <button class="menu-btn">☰</button>
+                <button class="menu-btn" id="menuBtn">☰</button>
             </div>
         </nav>
     </header>
 
-    <main class="container">
-        <!-- Hero Section -->
-        <section class="hero" id="hero">
-            <div class="hero-image">
-                <img src="Images/photo.png" alt="Lucas VINTENON">
+    <main>
+        <!-- Hero Section with Animation -->
+        <div class="hero-container" id="hero">
+            <section class="hero">
+                <div class="hero-image">
+                    <img src="Images/photo.png" alt="Lucas VINTENON">
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Lucas VINTENON</h1>
+                    <p class="hero-subtitle">Étudiant en BTS CIEL</p>
+                    <p class="hero-text">
+                        Étudiant en première année de BTS CIEL (Cybersécurité, Informatique et réseaux, Électronique), 
+                        passionné par l'informatique et à la recherche d'un stage pour enrichir mes compétences.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projets" class="download-btn">
+                            <i class="fas fa-laptop-code"></i>
+                            Voir mes projets
+                        </a>
+                        <a href="#ressources" class="download-btn" style="background-color: var(--secondary-color);">
+                            <i class="fas fa-file-download"></i>
+                            Télécharger CV
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" id="scroll-indicator">
+                <span>Découvrir plus</span>
+                <div class="scroll-arrow-container">
+                    <div class="scroll-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14"></path>
+                            <path d="M19 12l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="scroll-trail">
+                        <div class="scroll-dot"></div>
+                        <div class="scroll-dot"></div>
+                        <div class="scroll-dot"></div>
+                    </div>
+                </div>
             </div>
-            <div class="hero-content">
-                <h1 class="hero-title">Lucas VINTENON</h1>
-                <p class="hero-subtitle">Étudiant en BTS CIEL</p>
-                <p class="hero-text">
-                    Étudiant en première année de BTS CIEL (Cybersécurité, Informatique et réseaux, Électronique), 
-                    passionné par l'informatique et à la recherche d'un stage pour enrichir mes compétences.
+        </div>
+
+        <!-- Content Wrapper for all sections besides hero -->
+        <div class="container content-wrapper" id="content">
+            <!-- About Section -->
+            <section id="about" data-aos="fade-up">
+                <h2>À Propos</h2>
+                <p>
+                    Étudiant première année BTS CIEL (Cybersécurité, Informatique, Électronique et Réseaux) de 20 ans, 
+                    je suis à la recherche d'un enrichissement de mes connaissances dans l'informatique ainsi que dans 
+                    l'environnement professionnel. Motivé et curieux, je dispose déjà d'une expérience en électricité 
+                    à travers plusieurs stages, ce qui me donne une bonne compréhension des systèmes connectés.
+                    Actuellement en recherche d'un travail en informatique pour développer mes compétences dans ce domaine
+                    mais aussi les partagés.
                 </p>
-                <a href="#contact" class="download-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Télécharger CV
-                </a>
-            </div>
-        </section>
+            </section>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2>À Propos</h2>
-            <p>
-                Étudiant première année BTS CIEL (Cybersécurité, Informatique, Électronique et Réseaux) de 18 ans, 
-                je suis à la recherche d'un enrichissement de mes connaissances dans l'informatique ainsi que dans 
-                l'environnement professionnel. Motivé et curieux, je dispose déjà d'une expérience en électricité 
-                à travers plusieurs stages, ce qui me donne une bonne compréhension des systèmes connectés.
-                Actuellement en recherche d'un stage en informatique pour développer mes compétences dans ce domaine.
-            </p>
-        </section>
+            <!-- Formation Section -->
+            <section id="formation" data-aos="fade-up">
+                <h2>Formation</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <p class="timeline-date">2023 - 2025</p>
+                        <h3 class="timeline-title">BTS CIEL</h3>
+                        <p class="timeline-company">Lycée Saint Eloi, Aix-en-Provence</p>
+                        <p>Cybersécurité, Informatique, Électronique et Réseaux (formation en cours).</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">2020 - 2023</p>
+                        <h3 class="timeline-title">Bac Professionnel MELEC</h3>
+                        <p class="timeline-company">Lycée Professionnel Pierre Latécoère, Istres</p>
+                        <p>Métiers de l'Électricité et de ses Environnements Connectés, mention Bien.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">2016 - 2020</p>
+                        <h3 class="timeline-title">Brevet des collèges</h3>
+                        <p class="timeline-company">Collège Elie Coutarel, Istres</p>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Formation Section -->
-        <section id="formation">
-            <h2>Formation</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <p class="timeline-date">2023 - 2025</p>
-                    <h3 class="timeline-title">BTS CIEL</h3>
-                    <p class="timeline-company">Lycée Saint Eloi, Aix-en-Provence</p>
-                    <p>Cybersécurité, Informatique, Électronique et Réseaux (formation en cours).</p>
+            <!-- Experience Section -->
+            <section id="experience" data-aos="fade-up">
+                <h2>Expériences Professionnelles</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <p class="timeline-date">Mai - Juin 2024</p>
+                        <h3 class="timeline-title">Stage Professionnel Informatique</h3>
+                        <p class="timeline-company">Mairie de Lançon Provence</p>
+                        <p>Stage de 6 semaines au sein du service Informatique.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Mars - Avril 2023</p>
+                        <h3 class="timeline-title">Stage Professionnel Électricité</h3>
+                        <p class="timeline-company">DIMEG Énergie, Istres</p>
+                        <p>Stage de 4 semaines avec un Artisan Électricien. Installation et maintenance de systèmes électriques.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Novembre - Décembre 2022</p>
+                        <h3 class="timeline-title">Stage Professionnel Électricité</h3>
+                        <p class="timeline-company">DIMEG Énergie, Istres</p>
+                        <p>Stage de 4 semaines avec un Artisan Électricien. Installation et maintenance de systèmes électriques.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Juin 2022</p>
+                        <h3 class="timeline-title">Stage Professionnel Électricité</h3>
+                        <p class="timeline-company">Clinique de l'Étang de l'Olivier, Istres</p>
+                        <p>Stage de 4 semaines au sein du Service Technique. Maintenance électrique d'équipements hospitaliers.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Janvier 2022</p>
+                        <h3 class="timeline-title">Stage Professionnel Électricité</h3>
+                        <p class="timeline-company">Clinique de l'Étang de l'Olivier, Istres</p>
+                        <p>Stage de 4 semaines au sein du Service Technique. Maintenance électrique d'équipements hospitaliers.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Juin 2021</p>
+                        <h3 class="timeline-title">Stage Professionnel Électricité</h3>
+                        <p class="timeline-company">A.S.I, Istres</p>
+                        <p>Stage de 6 semaines chez Assistance Service Intervention. Installation et maintenance de systèmes électriques dans divers environnements.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <p class="timeline-date">Janvier 2020</p>
+                        <h3 class="timeline-title">Stage d'Observation</h3>
+                        <p class="timeline-company">Boucherie Tayeb, Istres</p>
+                        <p>Stage d'observation de 3ème en entreprise dans le cadre scolaire.</p>
+                    </div>
                 </div>
-                
-                <div class="timeline-item">
-                    <p class="timeline-date">2020 - 2023</p>
-                    <h3 class="timeline-title">Bac Professionnel MELEC</h3>
-                    <p class="timeline-company">Lycée Professionnel Pierre Latécoère, Istres</p>
-                    <p>Métiers de l'Électricité et de ses Environnements Connectés, mention Bien.</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <p class="timeline-date">2016 - 2020</p>
-                    <h3 class="timeline-title">Brevet des collèges</h3>
-                    <p class="timeline-company">Collège Elie Coutarel, Istres</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Experience Section -->
-        <section id="experience">
-            <h2>Expériences Professionnelles</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <p class="timeline-date">Mai - Juin 2024 (À venir)</p>
-                    <h3 class="timeline-title">Stage Professionnel Informatique</h3>
-                    <p class="timeline-company">Mairie de Lançon Provence</p>
-                    <p>Stage de 6 semaines au sein du service Informatique.</p>
+            <!-- Skills Section -->
+            <section id="competences" data-aos="fade-up">
+                <h2>Compétences</h2>
+                
+                <div class="skills-container">
+                    <h3>Langages de Programmation</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-html5 skill-icon"></i>
+                            <span class="skill-name">HTML</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt skill-icon"></i>
+                            <span class="skill-name">CSS</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-js skill-icon"></i>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon"></i>
+                            <span class="skill-name">SQL</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-python skill-icon"></i>
+                            <span class="skill-name">Python</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-php skill-icon"></i>
+                            <span class="skill-name">PHP</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-cuttlefish skill-icon"></i>
+                            <span class="skill-name">C++</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-node-js skill-icon"></i>
+                            <span class="skill-name">Node.js</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="timeline-item">
-                    <p class="timeline-date">Mars - Avril 2023</p>
-                    <h3 class="timeline-title">Stage Professionnel Électricité</h3>
-                    <p class="timeline-company">DIMEG Énergie, Istres</p>
-                    <p>Stage de 4 semaines avec un Artisan Électricien. Installation et maintenance de systèmes électriques.</p>
+                <div class="skills-container">
+                    <h3>Systèmes d'Exploitation & Outils</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-windows skill-icon"></i>
+                            <span class="skill-name">Windows</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-linux skill-icon"></i>
+                            <span class="skill-name">Linux</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-ubuntu skill-icon"></i>
+                            <span class="skill-name">Ubuntu</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-skull skill-icon"></i>
+                            <span class="skill-name">Kali Linux</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-debian skill-icon"></i>
+                            <span class="skill-name">Debian</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-code skill-icon"></i>
+                            <span class="skill-name">VS Code</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-server skill-icon"></i>
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt skill-icon"></i>
+                            <span class="skill-name">Git</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="timeline-item">
-                    <p class="timeline-date">Novembre - Décembre 2022</p>
-                    <h3 class="timeline-title">Stage Professionnel Électricité</h3>
-                    <p class="timeline-company">DIMEG Énergie, Istres</p>
-                    <p>Stage de 4 semaines avec un Artisan Électricien. Installation et maintenance de systèmes électriques.</p>
+                <div class="skills-container">
+                    <h3>Logiciels & Applications</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fas fa-file-word skill-icon"></i>
+                            <span class="skill-name">Word</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-file-excel skill-icon"></i>
+                            <span class="skill-name">Excel</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-file-powerpoint skill-icon"></i>
+                            <span class="skill-name">PowerPoint</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="timeline-item">
-                    <p class="timeline-date">Juin 2022</p>
-                    <h3 class="timeline-title">Stage Professionnel Électricité</h3>
-                    <p class="timeline-company">Clinique de l'Étang de l'Olivier, Istres</p>
-                    <p>Stage de 4 semaines au sein du Service Technique. Maintenance électrique d'équipements hospitaliers.</p>
+                <div class="skills-container">
+                    <h3>Compétences Personnelles</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fas fa-sync-alt skill-icon"></i>
+                            <span class="skill-name">Adaptabilité</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-users skill-icon"></i>
+                            <span class="skill-name">Travail en équipe</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-lightbulb skill-icon"></i>
+                            <span class="skill-name">Créativité</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-tasks skill-icon"></i>
+                            <span class="skill-name">Organisation</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="timeline-item">
-                    <p class="timeline-date">Janvier 2022</p>
-                    <h3 class="timeline-title">Stage Professionnel Électricité</h3>
-                    <p class="timeline-company">Clinique de l'Étang de l'Olivier, Istres</p>
-                    <p>Stage de 4 semaines au sein du Service Technique. Maintenance électrique d'équipements hospitaliers.</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <p class="timeline-date">Juin 2021</p>
-                    <h3 class="timeline-title">Stage Professionnel Électricité</h3>
-                    <p class="timeline-company">A.S.I, Istres</p>
-                    <p>Stage de 6 semaines chez Assistance Service Intervention. Installation et maintenance de systèmes électriques dans divers environnements.</p>
-                </div>
-                
-                <div class="timeline-item">
-                    <p class="timeline-date">Janvier 2020</p>
-                    <h3 class="timeline-title">Stage d'Observation</h3>
-                    <p class="timeline-company">Boucherie Tayeb, Istres</p>
-                    <p>Stage d'observation de 3ème en entreprise dans le cadre scolaire.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Skills Section -->
-        <section id="competences">
-            <h2>Compétences</h2>
+            <!-- Languages Section -->
+            <section id="langues" data-aos="fade-up">
+                <h2>Langues</h2>
+                
+                <div class="language-item">
+                    <div class="language-info">
+                        <span class="language-name">Français</span>
+                        <span class="language-level">Natif</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="100"></div>
+                    </div>
+                </div>
+                
+                <div class="language-item">
+                    <div class="language-info">
+                        <span class="language-name">Anglais</span>
+                        <span class="language-level">Intermédiaire</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="65"></div>
+                    </div>
+                </div>
+            </section>
             
-            <h3>Compétences Techniques</h3>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M21.17 2.06H13.66L12 0H2.77C1.24 0 0 1.24 0 2.77v18.46C0 22.76 1.24 24 2.77 24h18.46c1.53 0 2.77-1.24 2.77-2.77V5V4.83c0-1.53-1.24-2.77-2.83-2.77zM20 20c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h8.75l2.5 2.5H19c.55 0 1 .45 1 1V20z"></path>
-                    </svg>
-                    <span class="skill-name">Word</span>
+            <!-- Projects Section - New -->
+            <section id="projets" class="projects-section" data-aos="fade-up">
+                <h2>Mes Projets</h2>
+                
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="app">Applications</button>
+                    <button class="filter-btn" data-filter="cyber">Cybersécurité</button>
+                    <button class="filter-btn" data-filter="electronics">Électronique</button>
                 </div>
                 
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M21.17 2.06H13.66L12 0H2.77C1.24 0 0 1.24 0 2.77v18.46C0 22.76 1.24 24 2.77 24h18.46c1.53 0 2.77-1.24 2.77-2.77V5V4.83c0-1.53-1.24-2.77-2.83-2.77zM20 20c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h8.75l2.5 2.5H19c.55 0 1 .45 1 1V20zm-8-5h-2v-6h4v1h-3v2h3v1h-3v2h4v1h-5v-7h5v1h-3zm3 0h-1v-6h1l3 4v-4h1v6h-1l-3-4v4z"></path>
-                    </svg>
-                    <span class="skill-name">Excel</span>
+                <div class="projects-grid">
+                    <!-- Projet 1 -->
+                    <div class="project-card" data-category="web">
+                        <img src="/api/placeholder/800/400" alt="Site web e-commerce" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Site Web E-commerce</h3>
+                            <p class="project-desc">
+                                Développement d'un site e-commerce complet avec système de panier, paiement sécurisé et gestion des stocks.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">HTML</span>
+                                <span class="project-tech">CSS</span>
+                                <span class="project-tech">JavaScript</span>
+                                <span class="project-tech">PHP</span>
+                                <span class="project-tech">MySQL</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 2 -->
+                    <div class="project-card" data-category="cyber">
+                        <img src="/api/placeholder/800/400" alt="Projet Scanner de vulnérabilités" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Scanner de Vulnérabilités</h3>
+                            <p class="project-desc">
+                                Création d'un outil de scan de vulnérabilités pour détecter les failles potentielles dans les systèmes informatiques.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">Python</span>
+                                <span class="project-tech">Kali Linux</span>
+                                <span class="project-tech">Nmap</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code source
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 3 -->
+                    <div class="project-card" data-category="app">
+                        <img src="/api/placeholder/800/400" alt="Application de gestion de tâches" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Gestionnaire de Tâches</h3>
+                            <p class="project-desc">
+                                Application de gestion de tâches avec fonctionnalités de rappel, de catégorisation et de priorisation.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">JavaScript</span>
+                                <span class="project-tech">Node.js</span>
+                                <span class="project-tech">Express</span>
+                                <span class="project-tech">MongoDB</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 4 -->
+                    <div class="project-card" data-category="electronics">
+                        <img src="/api/placeholder/800/400" alt="Système domotique Arduino" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Système Domotique</h3>
+                            <p class="project-desc">
+                                Développement d'un système domotique basé sur Arduino pour contrôler l'éclairage et la température d'une pièce.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">Arduino</span>
+                                <span class="project-tech">C++</span>
+                                <span class="project-tech">IoT</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 5 -->
+                    <div class="project-card" data-category="web">
+                        <img src="/api/placeholder/800/400" alt="Portfolio personnel" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Portfolio Personnel</h3>
+                            <p class="project-desc">
+                                Conception et développement de mon portfolio personnel présentant mes compétences et projets.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">HTML</span>
+                                <span class="project-tech">CSS</span>
+                                <span class="project-tech">JavaScript</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 6 -->
+                    <div class="project-card" data-category="cyber">
+                        <img src="/api/placeholder/800/400" alt="Analyse de trafic réseau" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Analyseur de Trafic Réseau</h3>
+                            <p class="project-desc">
+                                Outil d'analyse de trafic réseau pour détecter des comportements suspects et des tentatives d'intrusion.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">Python</span>
+                                <span class="project-tech">Wireshark</span>
+                                <span class="project-tech">Linux</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code source
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 7 -->
+                    <div class="project-card" data-category="app">
+                        <img src="/api/placeholder/800/400" alt="Application météo" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Application Météo</h3>
+                            <p class="project-desc">
+                                Application météo avec prévisions à 7 jours, alertes et visualisation des données climatiques.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">JavaScript</span>
+                                <span class="project-tech">React</span>
+                                <span class="project-tech">API OpenWeather</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 8 -->
+                    <div class="project-card" data-category="electronics">
+                        <img src="/api/placeholder/800/400" alt="Robot suiveur de ligne" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Robot Suiveur de Ligne</h3>
+                            <p class="project-desc">
+                                Conception et programmation d'un robot capable de suivre une ligne et d'éviter des obstacles.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">Arduino</span>
+                                <span class="project-tech">C++</span>
+                                <span class="project-tech">Capteurs</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 9 -->
+                    <div class="project-card" data-category="web">
+                        <img src="/api/placeholder/800/400" alt="Blog technique" class="project-img">
+                        <div class="project-content">
+                            <h3 class="project-title">Blog Technique</h3>
+                            <p class="project-desc">
+                                Blog spécialisé dans les nouvelles technologies et la cybersécurité avec système de commentaires.
+                            </p>
+                            <div class="project-techs">
+                                <span class="project-tech">PHP</span>
+                                <span class="project-tech">MySQL</span>
+                                <span class="project-tech">Bootstrap</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Voir le projet
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M21.17 2.06H13.66L12 0H2.77C1.24 0 0 1.24 0 2.77v18.46C0 22.76 1.24 24 2.77 24h18.46c1.53 0 2.77-1.24 2.77-2.77V5V4.83c0-1.53-1.24-2.77-2.83-2.77zM20 20c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h8.75l2.5 2.5H19c.55 0 1 .45 1 1V20zm-7-3.5v-1h-4v-6h1v5h3z"></path>
-                    </svg>
-                    <span class="skill-name">PowerPoint</span>
-                </div>
-                
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"></path>
-                    </svg>
-                    <span class="skill-name">HTML</span>
-                </div>
-                
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"></path>
-                    </svg>
-                    <span class="skill-name">CSS</span>
-                </div>
-                
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M10.5 15.97l.41 2.44c-.26.14-.68.27-1.24.39-.57.13-1.24.2-2.01.2-2.21-.04-3.87-.7-4.98-1.96C1.56 15.77 1 14.16 1 12.21c.05-2.31.72-4.08 2-5.32C4.32 5.64 5.96 5 7.94 5c.75 0 1.4.07 1.94.19s.94.25 1.2.4l-.58 2.49-1.06-.34c-.4-.1-.86-.15-1.39-.15-1.16-.01-2.12.36-2.87 1.1-.76.73-1.15 1.85-1.18 3.34 0 1.36.37 2.42 1.08 3.2.71.77 1.71 1.17 2.99 1.18l1.33-.12c.43-.08.79-.19 1.1-.32M16.4 15.13L12.57 7.3h3.12l1.17 3.98c.31 1.07.59 2.13.84 3.18h.05c.19-.94.44-1.94.74-3.01l1.1-4.15h2.99l-3.61 7.83-1.34 6.44h-3l1.17-6.44"></path>
-                    </svg>
-                    <span class="skill-name">C++</span>
-                </div>
-            </div>
+            </section>
             
-            <h3 style="margin-top: 2rem;">Compétences Personnelles</h3>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M21,9C21,7.89 20.1,7 19,7H11L9,5H5A2,2 0 0,0 3,7V17A2,2 0 0,0 5,19H19A2,2 0 0,0 21,17V9M12,12L16,16H8L12,12Z"></path>
-                    </svg>
-                    <span class="skill-name">Adaptabilité</span>
-                </div>
+            <!-- Resources Section - New -->
+            <section id="ressources" class="resources-section" data-aos="fade-up">
+                <h2>Ressources & Documents</h2>
                 
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
-                    </svg>
-                    <span class="skill-name">Travail en équipe</span>
+                <div class="resources-container">
+                    <!-- Ressource 1 - CV -->
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <h3 class="resource-title">
+                                <i class="fas fa-file-alt"></i>
+                                Curriculum Vitae
+                            </h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="resource-content">
+                            <p class="resource-desc">
+                                Mon CV complet détaillant mon parcours académique, mes compétences et mes expériences professionnelles.
+                            </p>
+                            <div class="resource-actions">
+                                <a href="#" class="resource-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    Télécharger au format PDF
+                                </a>
+                                <a href="#" class="resource-btn download-btn" style="background-color: var(--secondary-color);">
+                                    <i class="fas fa-download"></i>
+                                    Version Word
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ressource 2 - Lettre de motivation -->
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <h3 class="resource-title">
+                                <i class="fas fa-envelope"></i>
+                                Lettre de Motivation
+                            </h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="resource-content">
+                            <p class="resource-desc">
+                                Lettre de motivation générale adaptable selon l'entreprise et le poste visé.
+                            </p>
+                            <div class="resource-actions">
+                                <a href="#" class="resource-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    Télécharger
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ressource 3 - Certifications -->
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <h3 class="resource-title">
+                                <i class="fas fa-certificate"></i>
+                                Certifications
+                            </h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="resource-content">
+                            <p class="resource-desc">
+                                Mes différentes certifications et attestations obtenues au cours de ma formation.
+                            </p>
+                            <div class="resource-actions">
+                                <a href="#" class="resource-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    Télécharger
+                                </a>
+                                <a href="#" class="resource-btn view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    Voir en ligne
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ressource 4 - Portfolio complet -->
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <h3 class="resource-title">
+                                <i class="fas fa-briefcase"></i>
+                                Portfolio Détaillé
+                            </h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="resource-content">
+                            <p class="resource-desc">
+                                Version complète et détaillée de mon portfolio avec présentation approfondie de mes projets.
+                            </p>
+                            <div class="resource-actions">
+                                <a href="#" class="resource-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    Télécharger PDF
+                                </a>
+                                <a href="#" class="resource-btn view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    Consulter en ligne
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Languages Section -->
-        <section id="langues">
-            <h2>Langues</h2>
-            
-            <div class="language-item">
-                <div class="language-info">
-                    <span class="language-name">Français</span>
-                    <span class="language-level">Natif</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 100%;"></div>
-                </div>
-            </div>
-            
-            <div class="language-item">
-                <div class="language-info">
-                    <span class="language-name">Anglais</span>
-                    <span class="language-level">Intermédiaire</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 65%;"></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Hobbies Section -->
-        <section id="loisirs">
-            <h2>Loisirs</h2>
-            
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"></path>
-                    </svg>
-                    <span class="skill-name">Informatique</span>
+            <!-- Contact Section -->
+            <section id="contact" data-aos="fade-up">
+                <h2>Contact</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <span>lvintenon@gmail.com</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <span>06 60 44 15 45</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <span>34H Avenue Alderic Chave, 13800 Istres</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-id-card contact-icon"></i>
+                        <span>Permis B</span>
+                    </div>
                 </div>
                 
-                <div class="skill-item">
-                    <svg class="skill-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M21,3L3,11L10,18L21,3M19.59,5.41L13.41,14.59L9.41,10.59L19.59,5.41M3,21V23H21V21H3Z"></path>
-                    </svg>
-                    <span class="skill-name">Voitures de compétition</span>
+                <h3 style="margin-top: 2rem; text-align: center;">Réseaux Sociaux</h3>
+                <div class="social-links">
+                    <a href="https://fr.linkedin.com/in/lucas-vintenon-6b5266291" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:lvintenon@gmail.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/votre-username" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Contact</h2>
-            
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span>lvintenon@gmail.com</span>
-                </div>
-                
-                <div class="contact-item">
-                    <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                    <span>06 60 44 15 45</span>
-                </div>
-                
-                <div class="contact-item">
-                    <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <span>34H Avenue Alderic Chave, 13800 Istres</span>
-                </div>
-                
-                <div class="contact-item">
-                    <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="8.5" cy="7" r="4"></circle>
-                        <polyline points="17 11 19 13 23 9"></polyline>
-                    </svg>
-                    <span>Permis B</span>
-                </div>
-            </div>
-            
-            <h3 style="margin-top: 2rem;">Réseaux Sociaux</h3>
-            <div class="social-links">
-                <a href="https://fr.linkedin.com/in/lucas-vintenon-6b5266291" class="social-link" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                </a>
-                <a href="mailto:lvintenon@gmail.com" class="social-link" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </a>
-            </div>
-            
-            <a href="#" class="download-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Télécharger CV
-            </a>
-        </section>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -852,16 +692,254 @@
         </div>
     </footer>
 
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
     <script>
-        // Mobile menu toggle
-        document.querySelector('.menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('show');
+        // Initialisation de AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
         });
         
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        // Variables
+        const header = document.getElementById('header');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinksContainer = document.getElementById('navLinks');
+        const contentWrapper = document.querySelector('.content-wrapper');
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        const backToTop = document.getElementById('backToTop');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const skillItems = document.querySelectorAll('.skill-item');
+        const languageItems = document.querySelectorAll('.language-item');
+        const progressBars = document.querySelectorAll('.progress');
+        const contactItems = document.querySelectorAll('.contact-item');
+        const socialLinks = document.querySelectorAll('.social-link');
+        const projectCards = document.querySelectorAll('.project-card');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const resourceHeaders = document.querySelectorAll('.resource-header');
+        const resourceItems = document.querySelectorAll('.resource-item');
+        
+        // Fonction pour activer le lien de navigation actif
+        function setActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Fonction pour vérifier si un élément est dans le viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Fonction pour animer les éléments au défilement
+        function animateOnScroll() {
+            // Animation de la timeline
+            timelineItems.forEach(item => {
+                if (isInViewport(item)) {
+                    item.classList.add('show');
+                }
+            });
+            
+            // Animation des compétences
+            skillItems.forEach((item, index) => {
+                if (isInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 100);
+                }
+            });
+            
+            // Animation des langues
+            languageItems.forEach((item, index) => {
+                if (isInViewport(item)) {
+                    item.classList.add('show');
+                    setTimeout(() => {
+                        const progressBar = item.querySelector('.progress');
+                        const width = progressBar.getAttribute('data-width');
+                        progressBar.style.width = width + '%';
+                    }, 300 + index * 200);
+                }
+            });
+            
+            // Animation des projets
+            projectCards.forEach((card, index) => {
+                if (isInViewport(card)) {
+                    setTimeout(() => {
+                        card.classList.add('show');
+                    }, index * 100);
+                }
+            });
+            
+            // Animation des ressources
+            resourceItems.forEach((item, index) => {
+                if (isInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 100);
+                }
+            });
+            
+            // Animation des contacts
+            contactItems.forEach((item, index) => {
+                if (isInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 100);
+                }
+            });
+            
+            // Animation des réseaux sociaux
+            socialLinks.forEach((link, index) => {
+                if (isInViewport(link.parentElement)) {
+                    setTimeout(() => {
+                        link.classList.add('show');
+                    }, 500 + index * 150);
+                }
+            });
+        }
+        
+        // Fonction pour gérer le défilement
+        function handleScroll() {
+            // Header sticky avec fond translucide au défilement
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                backToTop.classList.add('show');
+            } else {
+                header.classList.remove('scrolled');
+                backToTop.classList.remove('show');
+            }
+            
+            // Vérification si la section hero n'est plus entièrement visible
+            const heroContainer = document.querySelector('.hero-container');
+            const heroRect = heroContainer.getBoundingClientRect();
+            
+            if (heroRect.bottom < window.innerHeight) {
+                contentWrapper.style.animationPlayState = 'running';
+                // Masquer l'indicateur de défilement quand l'utilisateur a défilé
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.visibility = 'hidden';
+            } else {
+                // Afficher l'indicateur de défilement quand le hero est entièrement visible
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.visibility = 'visible';
+            }
+            
+            // Activer le lien de navigation correspondant à la section actuelle
+            setActiveNavLink();
+            
+            // Animer les éléments qui entrent dans le viewport
+            animateOnScroll();
+        }
+        
+        // Mobile menu toggle
+        menuBtn.addEventListener('click', function() {
+            navLinksContainer.classList.toggle('show');
+        });
+        
+        // Fermer le menu mobile en cliquant sur un lien
+        navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.remove('show');
+                navLinksContainer.classList.remove('show');
+            });
+        });
+        
+        // Rendre l'indicateur de défilement cliquable pour défiler vers le bas
+        scrollIndicator.addEventListener('click', function() {
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Bouton Retour en haut
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Filtrer les projets
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Accordéon pour les ressources
+        resourceHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.fa-chevron-down');
+                
+                // Toggle la classe active sur le contenu
+                content.classList.toggle('active');
+                
+                // Rotation de l'icône
+                if (content.classList.contains('active')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0)';
+                }
+            });
+        });
+        
+        // Écouter les événements de défilement
+        window.addEventListener('scroll', handleScroll);
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser l'état des éléments
+            handleScroll();
+            
+            // Initialiser les barres de progression des langues
+            progressBars.forEach(bar => {
+                bar.style.width = '0';
+            });
+            
+            // Ajouter une légère animation au chargement des sections
+            document.querySelectorAll('[data-aos]').forEach(item => {
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                }, 300);
             });
         });
     </script>
