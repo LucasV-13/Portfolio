@@ -1,7 +1,7 @@
 // Fichier d'intégration des projets GitHub (projects.js)
 
 // Configuration
-const username = 'votre-username-github';  // Remplacez par votre nom d'utilisateur GitHub
+const username = 'LucasV-13-github';  // Remplacez par votre nom d'utilisateur GitHub
 const projectsFile = '/data/projects.json'; // Chemin vers le fichier JSON généré par GitHub Actions
 const maxProjectsToShow = 9; // Nombre de projets à afficher initialement
 
