@@ -1,0 +1,243 @@
+name: Update GitHub Projects
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Exécuté tous les jours à minuit
+  workflow_dispatch:     # Pour pouvoir lancer manuellement
+  push:
+    branches:
+      - main             # S'exécute également lors d'un push sur la branche principale
+    paths:
+      - '.github/workflows/update-projects.yml'  # S'exécute si ce fichier est modifié
+
+jobs:
+  update-projects:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      - name: Install dependencies
+        run: npm install @octokit/rest
+        
+      - name: Fetch GitHub Projects
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          node -e '
+          const { Octokit } = require("@octokit/rest");
+          const fs = require("fs");
+          
+          async function fetchProjects() {
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+            const username = (await octokit.users.getAuthenticated()).data.login;
+            console.log(`Fetching repositories for ${username}...`);
+            
+            // Récupération de tous les dépôts (publics et privés)
+            const repos = [];
+            let page = 1;
+            let hasMoreRepos = true;
+            
+            while (hasMoreRepos) {
+              const { data: reposPage } = await octokit.repos.listForAuthenticatedUser({
+                per_page: 100,
+                page: page,
+                sort: "updated",
+                direction: "desc"
+              });
+              
+              if (reposPage.length === 0) {
+                hasMoreRepos = false;
+              } else {
+                repos.push(...reposPage);
+                page++;
+              }
+            }
+            
+            console.log(`Found ${repos.length} repositories`);
+            
+            const projectsData = await Promise.all(repos.map(async (repo) => {
+              try {
+                console.log(`Processing ${repo.name}...`);
+                
+                // Récupérer les langages
+                const { data: languages } = await octokit.repos.listLanguages({
+                  owner: repo.owner.login,
+                  repo: repo.name
+                });
+                
+                // Calculer les pourcentages de langages
+                const totalBytes = Object.values(languages).reduce((sum, bytes) => sum + bytes, 0);
+                const languagePercentages = {};
+                Object.entries(languages).forEach(([lang, bytes]) => {
+                  languagePercentages[lang] = Math.round((bytes / totalBytes) * 100);
+                });
+                
+                // Trier les langages par pourcentage décroissant
+                const sortedLanguages = Object.entries(languagePercentages)
+                  .sort((a, b) => b[1] - a[1])
+                  .map(([lang, percentage]) => ({ name: lang, percentage }));
+                
+                // Tenter de récupérer une image du README
+                let readmeImageUrl = null;
+                try {
+                  const { data: readme } = await octokit.repos.getReadme({
+                    owner: repo.owner.login,
+                    repo: repo.name
+                  });
+                  
+                  if (readme) {
+                    const content = Buffer.from(readme.content, "base64").toString();
+                    
+                    // Rechercher une image dans le README
+                    const imageMatch = content.match(/!\[.*?\]\((.*?)\)/);
+                    if (imageMatch && imageMatch[1]) {
+                      readmeImageUrl = imageMatch[1];
+                      
+                      // Convertir les chemins relatifs en absolus
+                      if (readmeImageUrl.startsWith("./") || (!readmeImageUrl.startsWith("http") && !readmeImageUrl.startsWith("/"))) {
+                        readmeImageUrl = `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${repo.default_branch || "main"}/${readmeImageUrl.replace("./", "")}`;
+                      }
+                    }
+                  }
+                } catch (err) {
+                  console.log(`No README image found for ${repo.name}`);
+                }
+                
+                // Récupérer les dates des commits
+                let lastCommitDate = repo.updated_at;
+                let firstCommitDate = null;
+                
+                try {
+                  const { data: commits } = await octokit.repos.listCommits({
+                    owner: repo.owner.login,
+                    repo: repo.name,
+                    per_page: 1
+                  });
+                  
+                  if (commits.length > 0) {
+                    lastCommitDate = commits[0].commit.committer.date;
+                  }
+                  
+                  // Essayer de récupérer le premier commit (peut ne pas fonctionner pour les grands dépôts)
+                  try {
+                    const { data: firstCommits } = await octokit.repos.listCommits({
+                      owner: repo.owner.login,
+                      repo: repo.name,
+                      per_page: 1,
+                      page: 1000000 // Un grand nombre pour aller à la fin
+                    });
+                    
+                    if (firstCommits.length > 0) {
+                      firstCommitDate = firstCommits[0].commit.committer.date;
+                    }
+                  } catch {
+                    // Ignorer les erreurs pour le premier commit
+                  }
+                } catch (err) {
+                  console.log(`Could not fetch commits for ${repo.name}: ${err.message}`);
+                }
+                
+                // Déterminer la catégorie en fonction des topics ou du langage principal
+                let category = "other";
+                const allTopics = (repo.topics || []).map(t => t.toLowerCase());
+                
+                if (allTopics.some(t => ["web", "website", "frontend", "html", "css", "javascript"].includes(t)) || 
+                    sortedLanguages.some(l => ["HTML", "CSS", "JavaScript", "TypeScript"].includes(l.name))) {
+                  category = "web";
+                } else if (allTopics.some(t => ["app", "application", "android", "ios", "mobile"].includes(t))) {
+                  category = "app";
+                } else if (allTopics.some(t => ["cyber", "security", "pentest", "hacking", "encryption"].includes(t))) {
+                  category = "cyber";
+                } else if (allTopics.some(t => ["electronic", "hardware", "arduino", "raspberry", "iot", "robot"].includes(t))) {
+                  category = "electronics";
+                }
+                
+                // Construction de l'objet projet
+                return {
+                  id: repo.id,
+                  name: repo.name,
+                  displayName: repo.name.replace(/-/g, " ").replace(/_/g, " "),
+                  description: repo.description || "Pas de description disponible",
+                  html_url: repo.html_url,
+                  homepage: repo.homepage,
+                  topics: repo.topics || [],
+                  private: repo.private,
+                  languages: sortedLanguages,
+                  mainLanguage: sortedLanguages.length > 0 ? sortedLanguages[0].name : null,
+                  image: readmeImageUrl || "",
+                  stars: repo.stargazers_count,
+                  forks: repo.forks_count,
+                  watchers: repo.watchers_count,
+                  size: repo.size,
+                  created_at: repo.created_at,
+                  updated_at: repo.updated_at,
+                  pushed_at: repo.pushed_at,
+                  last_commit: lastCommitDate,
+                  first_commit: firstCommitDate,
+                  category: category,
+                  is_fork: repo.fork,
+                  default_branch: repo.default_branch
+                };
+              } catch (err) {
+                console.error(`Error processing ${repo.name}:`, err);
+                return {
+                  id: repo.id,
+                  name: repo.name,
+                  html_url: repo.html_url,
+                  description: repo.description || "Pas de description disponible",
+                  error: err.message,
+                  private: repo.private
+                };
+              }
+            }));
+            
+            // Créer le dossier data s'il n'existe pas
+            if (!fs.existsSync("./data")) {
+              fs.mkdirSync("./data", { recursive: true });
+            }
+            
+            // Enregistrer les données des projets dans un fichier JSON
+            fs.writeFileSync("./data/projects.json", JSON.stringify(projectsData, null, 2));
+            console.log(`✅ Successfully fetched details for ${projectsData.length} projects`);
+            
+            // Générer aussi une version JSON simplifiée pour des raisons de performance
+            const simplifiedData = projectsData.map(p => ({
+              id: p.id,
+              name: p.name,
+              displayName: p.displayName,
+              description: p.description && p.description.substring(0, 120),
+              html_url: p.html_url,
+              homepage: p.homepage,
+              topics: p.topics,
+              private: p.private,
+              mainLanguage: p.mainLanguage,
+              image: p.image,
+              stars: p.stars,
+              category: p.category,
+              updated_at: p.updated_at
+            }));
+            
+            fs.writeFileSync("./data/projects-min.json", JSON.stringify(simplifiedData));
+            console.log("✅ Also generated minified projects data");
+          }
+          
+          fetchProjects().catch(err => {
+            console.error("❌ Error in script:", err);
+            process.exit(1);
+          });
+          '
+      
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add data/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update projects data"
+          git push
