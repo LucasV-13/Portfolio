@@ -837,4 +837,44 @@ footer {
         text-align: center;
         justify-content: center;
     }
+}template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-image {
+        width: 180px;
+        height: 180px;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .projects-filter {
+        justify-content: center;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .download-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
 }
